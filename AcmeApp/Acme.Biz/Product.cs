@@ -14,22 +14,46 @@ namespace Acme.Biz
     public class Product
     {
         #region Constructors
+        //version1
+        //public Product()
+        //{
+        //    //Shitty way
+        //    //var colorOptions = new string[4];
+        //    //colorOptions[0] = "Red";
+        //    //colorOptions[1] = "Blue";
+        //    //colorOptions[2] = "Green";
+        //    //colorOptions[3] = "Yellow";
+
+        //    //Collection initializer 🤘🏻
+        //    //OR var colorOptions = new string[4] { "Red", "Blue", "Green", "Yellow" };
+        //    //OR string[] colorOptions = new string[4] { "Red", "Blue", "Green", "Yellow" };
+        //    string[] colorOptions = { "Red", "Blue", "Green", "Yellow" };
+
+        //    Console.WriteLine(colorOptions);
+        //}
+
         public Product()
         {
-            //Shitty way
-            //var colorOptions = new string[4];
-            //colorOptions[0] = "Red";
-            //colorOptions[1] = "Blue";
-            //colorOptions[2] = "Green";
-            //colorOptions[3] = "Yellow";
+            //var colorOptions = new List<string>();
+            //colorOptions.Add("Red");
+            //colorOptions.Add("Blue");
+            //colorOptions.Add("Green");
+            //colorOptions.Add("Yellow");
+            var colorOptions = new List<string> {"Red", "Blue", "Green", "Yellow"};
+            colorOptions.Insert(2, "Purple");
 
-            //Collection initializer 🤘🏻
-            //OR var colorOptions = new string[4] { "Red", "Blue", "Green", "Yellow" };
-            //OR string[] colorOptions = new string[4] { "Red", "Blue", "Green", "Yellow" };
-            string[] colorOptions = { "Red", "Blue", "Green", "Yellow" };
+            var states = new Dictionary<string, string>
+            {
+                {"OH", "Ohio"},
+                {"CA", "California"},
+                {"HI", "Hawaii"},
+                {"ND", "North Dakota"},
+                {"NY", "New York"}
+            };
+            //states.Add("NY", "New York");
 
-            Console.WriteLine(colorOptions);
         }
+
         public Product(int productId,
                         string productName,
                         string description) : this()
