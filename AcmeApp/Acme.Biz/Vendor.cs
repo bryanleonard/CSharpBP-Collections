@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -107,6 +108,27 @@ namespace Acme.Biz
                                                         message,
                                                         this.Email);
             return confirmation;
+        }
+
+
+
+
+        //Moving up the list of inheritence
+        //public static List<string> SendEmail(List<Vendor> vendors, string message)
+        //public static List<string> SendEmail(IList<Vendor> vendors, string message)
+        public static List<string> SendEmail(ICollection<Vendor> vendors, string message)
+        {
+            var confirmations = new List<string>();
+            var emailService = new EmailService();
+
+            foreach (var vendor in vendors)
+            {
+                var subject = "Important email for: " + vendor.CompanyName;
+                var confirmation = emailService.SendMessage(subject, message, vendor.Email);
+                confirmations.Add(confirmation);
+            }
+
+            return confirmations;
         }
     }
 }

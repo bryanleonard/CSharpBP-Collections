@@ -147,5 +147,70 @@ namespace Acme.Biz.Tests
             // Assert
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void SendEmailTest()
+        {
+            //Arrange
+            var vendorRepository = new VendorRepository();
+            var vendorsCollection = vendorRepository.Retrieve();
+
+            var vendors = vendorsCollection.ToList();
+
+                //Console.WriteLine(vendorsCollection.Count);
+
+            var expected = new List<string>()
+            {
+                "Message sent: Important email for: ABC Corp",
+                "Message sent: Important email for: XYZ Inc",
+            };
+
+            //Act
+            var actual = Vendor.SendEmail(vendorsCollection, "Test Message");
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        public void SendEmailTestArray()
+        {
+            //Arrange
+            var vendorRepository = new VendorRepository();
+            var vendors = vendorRepository.RetrieveArray();
+
+            var expected = new List<string>()
+            {
+                "Message sent: Important email for: ABC Corp",
+                "Message sent: Important email for: XYZ Inc",
+            };
+
+            //Act
+            var actual = Vendor.SendEmail(vendors, "Test Message");
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void SendEmailTestDictionary()
+        {
+            //Arrange
+            var vendorRepository = new VendorRepository();
+            //var vendors = vendorRepository.RetrieveWithKeys();
+            var vendorsCollection = vendorRepository.Retrieve();
+            var vendors = vendorsCollection.ToDictionary(v => v.CompanyName);
+
+            var expected = new List<string>()
+            {
+                "Message sent: Important email for: ABC Corp",
+                "Message sent: Important email for: XYZ Inc",
+            };
+
+            //Act
+            var actual = Vendor.SendEmail(vendors.Values, "Test Message");
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }
